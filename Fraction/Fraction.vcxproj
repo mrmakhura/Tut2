@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FractionClass.cpp" />
+    <ClCompile Include="FractionClassMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FractionClass.h" />
