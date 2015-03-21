@@ -4,21 +4,35 @@
 #include "FractionClass.h"
 using namespace std;
 
-FractionClass::FractionClass( int x , int y )
+FractionClass::FractionClass( int x , int y )//calls member function setNum/setDeno to set variables; default are 0 (see class definition)
 {
 	setNum(x);
 	setDeno(y);
 }
-	void FractionClass::numMessage(int &i,int &o)//
+
+FractionClass::~FractionClass()
+{}
+
+	int FractionClass::getDeno()
 	{
-		cout << "Please enter the numerator for fraction [" << i << "] :";
-		cin >> o;
+		return ideno;
 	}
 
-	void FractionClass::denoMessage(int &i, int &o)//
+	int FractionClass::getNumer()
+	{
+		return inumer;
+	}
+
+	void FractionClass::numMessage(int &i)//
+	{
+		cout << "Please enter the numerator for fraction [" << i << "] :";
+		//cin >> o;
+	}
+
+	void FractionClass::denoMessage(int &i)//
 	{
 		cout << "Please enter the denomenator for fraction [" << i << "] :";
-		cin >> o;
+		//cin >> o;
 	}
 
 	void FractionClass::displayMessage()//
@@ -46,41 +60,13 @@ FractionClass::FractionClass( int x , int y )
 
 	void FractionClass::displayFraction()//
 	{
-		int iCoef, iNum, iDeno;
-
-		iCoef = 0;
-		iNum = 0;
-		iDeno = 0;
-
-
-		if (inumer> ideno)
-		{
-
-			doWorkings(inumer, ideno, iCoef, iNum, iDeno);
-
-			cout << "The fraction  is an Improper Fraction : " << inumer << "/" <<ideno << endl;
-
-			if (iNum <= 0)
-			{
-				cout << "Therefore this fraction can be writen in its Proper Fraction : " << iCoef << endl<<endl;
-			}
-			else
-			{
-				cout << "Therefore this fraction can be writen in its Proper Fraction : " << iCoef << "  " << iNum << "/" << iDeno << " " << endl<<endl;
-			}
-		}
-		else
-		{
-			cout << "The fraction  is a Proper Fraction : " << inumer << "/" << ideno << endl<<endl;
-		}
-
+		
 	}//
 
 	void FractionClass::addFracs(int &x1, int &y1, int &x2, int &y2)///
 	{
 		cout << "\n ***** ADDITION OF THE 2 FRACTIONS *****" << endl;
 		cout << "(" << x1 << "/" << y1 << ") + " << "(" << x2 << "/" << y2 << ")  = ..." << endl;
-		displayFraction();
 	}
 
 	void FractionClass::subtractFrac(int &x1, int &y1, int &x2, int &y2)
@@ -88,7 +74,6 @@ FractionClass::FractionClass( int x , int y )
 		
 		cout << "\n ***** SUBTRACTION OF THE 2 FRACTIONS *****" << endl;
 		cout << "(" << x1 << "/" << y1 << ") - " << "(" << x2 << "/" << y2 << ")  = ..." << endl;
-		displayFraction();
 
 	}
 
@@ -97,16 +82,14 @@ FractionClass::FractionClass( int x , int y )
 
 		cout << "\n ***** MULTIPLICATION OF THE 2 FRACTIONS *****" << endl;
 		cout << "(" << x1 << "/" << y1 << ") * " << "(" << x2 << "/" << y2 << ")  = ..." << endl;
-		displayFraction();
 
 	}
 
 	void FractionClass::divFrac(int &x1, int &y1, int &x2, int &y2)
 	{
-		
+
 		cout << "\n ***** DIVISION OF THE 2 FRACTIONS *****" << endl;
 		cout << "(" << x1 << "/" << y1 << ") / " << "(" << x2 << "/" << y2 << ")  = ..." << endl;
-		displayFraction();
 
 	}
 
@@ -148,4 +131,54 @@ FractionClass::FractionClass( int x , int y )
 		Divide.ideno = Frac2.inumer*(this->ideno);
 
 		return Divide;
+	}
+
+	void FractionClass::incCounter()
+	{
+		++iCount;
+	}
+	
+	ostream &operator<<(ostream& os, FractionClass& v)
+	{
+		int iCoef, iNum, iDeno;
+
+		iCoef = 0;
+		iNum = 0;
+		iDeno = 0;
+
+
+		if (v.inumer> v.ideno)
+		{
+
+			v.doWorkings(v.inumer, v.ideno, iCoef, iNum, iDeno);
+
+
+			os << "The fraction  is an Improper Fraction : " << v.inumer << "/" << v.ideno << endl;
+
+			if (iNum <= 0)
+			{
+				os << "Therefore this fraction can be writen in its Proper Fraction : " << iCoef << endl << endl;
+			}
+			else
+			{
+				os << "Therefore this fraction can be writen in its Proper Fraction : " << iCoef << "  " << iNum << "/" << iDeno << " " << endl << endl;
+			}
+		}
+		else
+		{
+			os << "The fraction  is a Proper Fraction : " << v.inumer << "/" << v.ideno << endl << endl;
+		}
+
+		return os;
+	}
+
+	istream &operator>>(istream& is, FractionClass& v)
+	{
+		
+		++v.iCount;
+		v.numMessage(v.iCount);
+		is >> v.inumer;
+		v.denoMessage(v.iCount);
+		is >> v.ideno;
+		return is;
 	}
