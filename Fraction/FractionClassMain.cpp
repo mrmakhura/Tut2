@@ -15,7 +15,6 @@ int main()
 
 	cin >> myfraction1;
 	cout << myfraction1;
-
 	iNum1 = myfraction1.getNumer();
 	iDeno1 = myfraction1.getDeno();
 

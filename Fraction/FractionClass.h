@@ -48,7 +48,7 @@ private:
 
 };
 
-	ostream &operator<<(ostream&,  FractionClass&);
+	ostream &operator<<(ostream&, FractionClass&);
 	istream &operator>>(istream&, FractionClass&);
 
 #endif

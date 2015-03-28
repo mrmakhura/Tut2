@@ -180,5 +180,11 @@ FractionClass::~FractionClass()
 		is >> v.inumer;
 		v.denoMessage(v.iCount);
 		is >> v.ideno;
+		while (v.ideno == 0)
+		{
+			v.denoMessage(v.iCount);
+			is >> v.ideno;
+		}
+
 		return is;
 	}
